@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Responsive Web -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Meta -->
+    <title>MBDocument demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/520a56b89c.js" crossorigin="anonymous"></script>
+    <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container-fluid page">
+        <main id="MBDetailDocument">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">Basic</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="meta-tab" data-bs-toggle="tab" data-bs-target="#meta" type="button" role="tab" aria-controls="meta" aria-selected="false">Meta</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="chapter-tab" data-bs-toggle="tab" data-bs-target="#chapter" type="button" role="tab" aria-controls="chapter" aria-selected="false">Chapter</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="home-tab">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="document_name" v-text="document.name">Document name</label>
+                                            <input type="text" class="form-control" id="document_name" v-model="document.name" v-bind:value="document.name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="document_description">Document description</label>
+                                            <textarea class="form-control" id="document_description" rows="3" v-model="document.description"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="document_thumbnail">Document thumbnail</label>
+                                            <input type="text" class="form-control" id="document_thumbnail" v-model="document.thumbnail">
+                                        </div>
+                                        <button class="btn btn-primary mt-2" v-on:click="updateDocument($event)"><span><i class="far fa-plus-square"></i><span>Update document</span></span></button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="meta" role="tabpanel" aria-labelledby="profile-tab">
+
+                                </div>
+                                <div class="tab-pane fade" id="chapter" role="tabpanel" aria-labelledby="contact-tab">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover document-list">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Thumbnail</th>
+                                                            <th scope="col">Chapter order</th>
+                                                            <th scope="col">Date create</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Viewed</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-if="document.chapter" v-for="chap in document.chapter">
+                                                            <th scope="row">{{chap.id}}</th>
+                                                            <th scope="row">{{chap.title}}</th>
+                                                            <th scope="row">
+                                                                <img class="icon" v-bind:src="chap.thumbnail" />
+                                                            </th>
+                                                            <th scope="row">{{chap.chapter_order}}</th>
+                                                            <th scope="row">{{chap.date_create}}</th>
+                                                            <th scope="row">{{chap.status}}</th>
+                                                            <th scope="row">{{chap.viewed}}</th>
+                                                            <th scope="row">
+                                                                <div class="btn-group-vertical" role="group">
+                                                                    <button class="btn btn-primary" v-on:click="onEditChapter(chap)"><i class="fas fa-edit"></i></button>
+                                                                    <button class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                                                    <button class="btn btn-danger" v-on:click="onRemoveChapter(chap)"><i class="fas fa-trash"></i></button>
+                                                                    <button class="btn btn-primary"><i class="far fa-check-square"></i></button>
+                                                                </div>
+                                                            </th>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="5">
+
+                                                            </td>
+                                                            <td colspan="3">
+                                                                <button class="btn btn-primary" v-on:click="addDocumentChapter"><i class="far fa-plus-square"></i><span>Add chapter</span></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="../assets/mbDocument.js"></script>
+    <script src="../assets/js/helper.js"></script>
+    <script>
+        const message = new MBMessaging(1088)
+        var app = {
+            el: '#MBDetailDocument',
+            data: {
+                doc: new MBDocument()
+            },
+            computed: {
+                document() {
+                    return this.doc
+                }
+            },
+            methods: {
+                detailDocument(document_id) {
+                    mbClient.detailDocument(document_id).then(function(response) {
+                        this.doc.mapWithJson(response.result.document)
+                    }.bind(this)).catch(function(error) {
+                        console.log(error)
+                    }.bind(this))
+                },
+                addDocumentChapter() {
+                    this.doc.addNewChapter({}).then(function(response) {
+                        console.log(response)
+                    }).catch(function(error) {
+                        console.log(error)
+                    })
+                },
+                updateDocument(event) {
+                    const element = event.currentTarget
+                    AJAX_HELPER.setButtonLoading(event.currentTarget)
+                    this.doc.updateDocument().then(function(response) {
+                        AJAX_HELPER.removeButtonLoading(element)
+                    }.bind(this)).then(function(error) {
+                        AJAX_HELPER.removeButtonLoading(element)
+                        console.log(error)
+                    }.bind(this))
+                },
+                onRemoveChapter(chapter) {
+                    this.document.removeChapter(chapter)
+                },
+                onEditChapter(chap) {
+                    const href = '../chapter/edit.html?chapter_id=' + chap.id
+                    if (window.top) {
+                        window.top.location.href = href
+                    } else {
+                        window.location.href = href
+                    }
+                }
+            },
+            mounted: function() {
+                //this.doc = new MBDocument()
+                const url = new URL(window.location.href)
+                const document_id = url.searchParams.get("document_id")
+                this.detailDocument(document_id)
+
+            }
+        }
+        window.onload = function() {
+            new Vue(app)
+        }
+    </script>
+</body>
+
+</html>

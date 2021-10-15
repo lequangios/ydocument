@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Responsive Web -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Meta -->
+
+    <title>MBDocument demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/520a56b89c.js" crossorigin="anonymous"></script>
+    <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="MBChapterEdit" class="container-fluid page">
+        <header>
+        </header>
+        <div class="main-page row">
+            <aside class="col-2">
+                <div class="information">
+                    <a class="logo">
+                        <img src="../assets/images/mbcodelab.png" />
+                    </a>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/"><i class="fas fa-file-alt"></i><span>Document</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chapter.html"><i class="fas fa-file-invoice"></i><span>Chapter</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/author.html"><i class="fas fa-users"></i><span>Author</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/category.html"><i class="fas fa-layer-group"></i><span>Category</span></a>
+                    </li>
+                </ul>
+            </aside>
+            <main class="col-10">
+                <section>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Chapter</li>
+                        </ol>
+                    </nav>
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav nav-tabs" id="chapterTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Information</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="content-tab" data-bs-toggle="tab" data-bs-target="#content" type="button" role="tab" aria-controls="content" aria-selected="false">Content</button>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content" id="chapterTabContent">
+                                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                                    <div class="form-group">
+                                        <label for="chapter_title">Title</label>
+                                        <input type="text" class="form-control" id="chapter_title" v-model="chapter.title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chapter_content">Content</label>
+                                        <textarea class="form-control" id="chapter_content" rows="3" v-model="chapter.content"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <label for="chapter_thumbnail">Thumbnail</label>
+                                            <input type="text" class="form-control" id="chapter_thumbnail" v-model="chapter.thumbnail">
+                                        </div>
+                                        <div class="col-4">
+                                            <template v-if="chapter.thumbnail!=''">
+                                                <img class="thumbnail" v-bind:src="chapter.thumbnail" />
+                                            </template>
+                                            <template v-else>
+                                                <img class="thumbnail" src="../assets/images/no-img.png" />
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="chapter_status">Status</label>
+                                        <div class="col-3">
+                                            <template v-if="chapter.status == 1">
+                                                <button class="btn btn-success"><i class="fas fa-toggle-on"></i></button>
+                                            </template>
+                                            <template v-else>
+                                                <button class="btn btn-secondary"><i class="fas fa-toggle-off"></i></button>
+                                            </template>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="chapter_bookmark">Bookmark</label>
+                                            <template v-if="chapter.isBookMark == 1">
+                                                <button class="btn btn-success"><i class="fas fa-toggle-on"></i></button>
+                                            </template>
+                                            <template v-else>
+                                                <button class="btn btn-secondary"><i class="fas fa-toggle-off"></i></button>
+                                            </template>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="chapter_order">Chapter order</label>
+                                            <input type="number" class="form-control" id="chapter_order" v-model="chapter.chapter_order">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="content" role="tabpanel" aria-labelledby="content-tab">
+                                    <div>
+                                        <div class="row section" v-for="section in chapter.node.child">
+                                            <div class="col-12">
+                                                <div class="row section-title">
+                                                    <div class="col-11">
+                                                        <div class="input-group ">
+                                                            <span class="input-group-text" for="section_title">Title</span>
+                                                            <input type="text" class="form-control" id="section_title" v-model="section.title" v-bind:value="section.title">
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="section-button col-1" role="group">
+                                                        <!-- <button class="btn btn-primary" v-on:click="editSection(section)"><i class="fas fa-edit"></i></button> -->
+                                                        <button class="btn btn-danger" v-on:click="removeSection(section)"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="section-content">
+                                                    <div class="data">
+                                                        <div class="data-content">{{section.content!=''?section.content:"Empty content"}}</div>
+                                                        <a v-on:click="editNode(section)"><i class="fas fa-edit"></i></a>
+                                                    </div>
+                                                    <div class="child">
+                                                        <child-node-template :node="section" v-on:addchildblock="addSectionChildBlock(section)" v-on:removeChildNodeEvent="removeChildNode" v-on:editchildnode="editNode"></child-node-template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row chapter-button">
+                            <div class="col-12">
+                                <a class="btn btn-primary mt-2 mb-2 float-end" v-bind:class="updateChapterBtn" v-on:click="updateChapter"><i class="far fa-plus-square"></i><span>Update Chapter</span></a>
+                                <a class="btn btn-success mt-2 mb-2 me-2 float-end" v-on:click="addSection"><i class="far fa-plus-square"></i><span>Add Section</span></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <footer>
+            <p>©Copyright 2021 by levietquangt@gmail.com. All rights reversed.</p>
+        </footer>
+        <div class="modal " id="FormModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{modal.title}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="completeEditSection()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="FormModalFrame" class="container" v-bind:src="modal.url"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="FromOverlay"></div>
+    </div>
+    <script type="text/x-template" id="child-node-template">
+        <div class="child">
+            <template v-if="node">
+                <div class="child-node" v-bind:id="node.idCSS">
+                    <div class="node-content">
+                        <p v-if="node.isSection == false">{{node.type.name}}</p>
+                        <p v-if="node.isSection == true">{{node.type.name+' body'}}</p>
+                        <child-node-template v-if="node.child.length > 0" v-for="child in node.child" :node="child" v-on:addchildblock="addChildBlockEventFire" v-on:removeChildNodeEvent="removChildFire" v-on:editchildnode="editNodeFire"></child-node-template>
+                    </div>
+                    <div class="node-btn">
+                        <a class="btn btn-primary" v-on:click="editNode(node)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-primary" v-on:click="addChildBlock(node)"><i class="fas fa-plus"></i> <i class="fas fa-th-large"></i> </a>
+                        <a class="btn btn-primary"><i class="fas fa-plus"></i> <i class="fas fa-file-word"></i></a>
+                        <a class="btn btn-danger" v-if="node.isSection == false" v-on:click="removeChild(node)"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="../assets/mbDocument.js"></script>
+    <script src="../assets/js/helper.js"></script>
+    <script src="../assets/js/chapter_edit.js"></script>
+
+</body>
+
+</html>

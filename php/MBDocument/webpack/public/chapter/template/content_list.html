@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Responsive Web -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Meta -->
+    <title>MBDocument demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/520a56b89c.js" crossorigin="anonymous"></script>
+    <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container-fluid page">
+        <main id="block-list-template">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3" v-for="item in block">
+                            <a class="btn btn-primary mt-2 mb-2" v-on:click="selectBlock(item)"><span>{{item.name}}</span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="../../assets/mbDocument.js"></script>
+    <script>
+        const message = new MBMessaging(1088)
+        var app = {
+            el: '#block-list-template',
+            data() {
+                return {
+                    node: undefined
+                }
+            },
+            computed: {
+                block() {
+                    if (this.node) {
+                        return this.node.allowContent
+                    } else return []
+                }
+            },
+            watch: {
+
+            },
+            methods: {
+                selectBlock: function(block) {
+                    console.log('add_new_content')
+                    message.sendMessage('add_new_content', block);
+                }
+            },
+            mounted: function() {
+                if (window.top && window.top.node) {
+                    this.node = window.top.node
+                }
+            }
+        }
+        new Vue(app)
+    </script>
+</body>
+
+</html>

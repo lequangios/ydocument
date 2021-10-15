@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Responsive Web -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Meta -->
+
+    <title>MBDocument demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/520a56b89c.js" crossorigin="anonymous"></script>
+    <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body class="page-wrap">
+    <div id="MBCategory" class="container-fluid page">
+        <header>
+        </header>
+        <div class="main-page row">
+            <aside class="col-2">
+                <div class="information">
+                    <a class="logo">
+                        <img src="assets/images/mbcodelab.png" />
+                    </a>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-file-alt"></i><span>Document</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chapter.html"><i class="fas fa-file-invoice"></i><span>Chapter</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/author.html"><i class="fas fa-users"></i><span>Author</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/category.html"><i class="fas fa-layer-group"></i><span>Category</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-on:click="onShowMedia"><i class="fas fa-photo-video"></i><span>Media</span></a>
+                    </li>
+                </ul>
+            </aside>
+            <main class="col-10">
+                <section>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Category</li>
+                        </ol>
+                    </nav>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover document-list">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Thumbnail</th>
+                                                <th scope="col">Path</th>
+                                                <th scope="col">Level</th>
+                                                <th scope="col">Views</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="cate in categories">
+                                                <th scope="row">{{cate.id}}</th>
+                                                <td>{{cate.name}}</td>
+                                                <td>{{cate.description}}</td>
+                                                <td><img class="thumbnail" v-bind:src="cate.thumbnail" /></td>
+                                                <td>{{cate.path}}</td>
+                                                <td>{{cate.level}}</td>
+                                                <td>{{cate.views}}</td>
+                                                <td>
+                                                    <div class="btn-group-vertical" role="group">
+                                                        <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                                        <a class="btn btn-primary" target="_blank"><i class="far fa-eye"></i></a>
+                                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                        <button class="btn btn-primary"><i class="far fa-check-square"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+
+                                                </td>
+                                                <td colspan="3">
+                                                    <button class="btn btn-primary"><i class="far fa-plus-square"></i><span>Add document</span></button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <footer>
+            <p>©Copyright 2021 by levietquangt@gmail.com. All rights reversed.</p>
+        </footer>
+        <div class="modal " id="FormModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{modal.title}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="onCloseModal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe class="container" v-bind:src="modal.url"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="FromOverlay">
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="assets/mbDocument.js"></script>
+    <script src="assets/js/helper.js"></script>
+    <script src="assets/js/category_list.js"></script>
+</body>
+
+</html>

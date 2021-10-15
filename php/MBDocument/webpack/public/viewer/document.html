@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document Viewer | levietquangt2@gmail.com</title>
+    <link href='assets/css/ebook.css' rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="document" class="template1">
+        <header></header>
+        <template v-if="document">
+            <aside>
+                <nav class="table-content" v-html="document.table_content"></nav>
+            </aside>
+            <main v-html="document.html_content">
+            </main>
+        </template>
+        <footer></footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="../assets/mbDocument.js"></script>
+    <script type="text/javascript" src="assets/js/viewer.js"></script>
+</body>
+
+</html>

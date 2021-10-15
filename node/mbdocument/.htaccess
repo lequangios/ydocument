@@ -1,0 +1,63 @@
+# Preventing direct access to any .ht file (.htaccess, .htpasswd, etc.)
+Options +FollowSymlinks
+
+# Prevent Directoy listing
+Options -Indexes
+
+<FilesMatch "^\.ht">
+    Require all denied
+</FilesMatch>
+
+
+<IfModule mod_rewrite.c>
+# Start to Rewrite
+RewriteEngine On
+
+# For all URL starting with /css, /fonts, /img or /js
+RewriteCond %{REQUEST_URI} ^/?(css|fonts|img|js)(/.*)?$ [NC]
+RewriteRule ^.*$ /client/assets/%1%2 [L]
+
+# Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+## For all URL starting with /css, /fonts, /img or /js
+#RewriteCond %{REQUEST_URI} ^/manager/?(css|fonts|img|js)(/.*)?$ [NC]
+#RewriteRule ^.*$ /manager/assets/%1%2 [L]
+
+## Redirect all to the Application if not done already
+#RewriteCond %{REQUEST_URI} !^/?site/public/index\.php [NC]
+## but not if the URL starts with css, fonts, img or js
+#RewriteCond %{REQUEST_URI} !^/?(css|fonts|img|js)(/.*)?$ [NC]
+## or if request is a real file
+#RewriteCond %{REQUEST_FILENAME} !-f
+## or if request is a real directory but not the root directory
+#RewriteCond %{REQUEST_URI} ^/?$ [OR]
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite the rest to the index.php file in api folder
+#RewriteCond %{REQUEST_URI} ^/?(api)(/.*)?$ [NC]
+#RewriteRule ^.*$ /api/index.php [L]
+#
+## Rewrite the rest to the index.php file in manager folder
+#RewriteCond %{REQUEST_URI} ^/?(manager)(/.*)?$ [NC]
+#RewriteRule ^.*$ /manager/index.php [L]
+
+# Rewrite the rest to the index.php file in client folder
+#RewriteBase /
+#RewriteRule ^.*$ /client/%1%2 [L]
+##RewriteRule ^([^?]*) /client/index.php [NC,L]
+##RewriteRule ^$ client [L]
+##RedirectMatch ^/$ /client/index.php
+#RewriteRule ^/client/(.*)$ /$1 [L]
+</IfModule>

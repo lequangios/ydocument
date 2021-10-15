@@ -1,0 +1,32 @@
+CREATE TABLE `mbdocument`.`document` ( `id` INT(25) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NULL , `description` VARCHAR(255) NULL , `thumbnail` VARCHAR(255) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `mbdocument`.`chapter` ( `id` INT(25) NOT NULL , `document_id` INT(25) NOT NULL , `chapter_order` INT(5) NOT NULL , `title` VARCHAR(255) NOT NULL , `thumbnail` VARCHAR(255) NOT NULL , `content` VARCHAR(255) NOT NULL , `isBookMark` BOOLEAN NOT NULL , `level` INT(5) NOT NULL , `length` INT(5) NOT NULL , `child` VARCHAR(255) NOT NULL , `language_id` INT(2) NOT NULL , `date_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `date_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `html_content` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
+ALTER TABLE `chapter` ADD PRIMARY KEY(`id`);
+ALTER TABLE `chapter` CHANGE `id` `id` INT(25) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `mbdocument`.`author` ( `id` INT(25) NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `avatar` VARCHAR(100) NOT NULL , `bio` VARCHAR(255) NULL , `address` VARCHAR(100) NULL , `phone` VARCHAR(100) NULL , `email` VARCHAR(100) NULL , `website` VARCHAR(100) NULL , `rating` FLOAT NOT NULL DEFAULT '0' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `mbdocument`.`category` ( `id` INT(25) NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `description` VARCHAR(255) NULL , `thumbnail` VARCHAR(100) NULL , `parent_id` INT(25) NULL , `level` INT(2) NULL DEFAULT '0' , `views` INT(5) NOT NULL DEFAULT '0' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `mbdocument`.`document_meta` ( `id` INT(25) NOT NULL AUTO_INCREMENT , `document_id` INT(25) NOT NULL , `author_id` INT(25) NOT NULL , `category_id` INT(25) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `mbdocument`.`meta` ( `id` INT(25) NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `type` VARCHAR(100) NOT NULL , `value` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+INSERT INTO `meta` (`id`, `name`, `type`, `value`) VALUES (NULL, 'Chapter', 'NodeType', '{ name:\"chapter\", weight:0, element: false}');
+INSERT INTO `meta` (`id`, `name`, `type`, `value`) VALUES (NULL, 'Section', 'NodeType', '{ name:\"section\", weight:1, element: false}');
+INSERT INTO `meta` (`id`, `name`, `type`, `value`) VALUES (NULL, 'BlockLevel1', 'NodeType', '{ name:\"block-level-1\", weight:2, element: false}'), (NULL, 'BlockLevel2', 'NodeType', '{ name:\"block-level-2\", weight:3, element: false}'), (NULL, 'BlockLevel3', 'NodeType', '{ name:\"block-level-3\", weight:4, element: false}'), (NULL, 'BlockLevel4', 'NodeType', '{ name:\"block-level-4\", weight:5, element: false}'), (NULL, 'BlockLevel5', 'NodeType', '{ name:\"block-level-5\", weight:6, element: false}'), (NULL, 'Row', 'NodeType', '{ name:\"row\", weight:7, element: true}'), (NULL, 'Column', 'NodeType', '{ name:\"column\", weight:7, element: true}');
+
+INSERT INTO `meta` (`id`, `name`, `type`, `value`) VALUES (NULL, 'Body', 'NodeType', '{ name:\"body\", weight:7, element: true}'), (NULL, 'Paragraph', 'NodeType', '{name:\"paragraph\", weight:8, element:true}');
+
+ALTER TABLE `author` CHANGE `bio` `bio` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `chapter` CHANGE `child` `child` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+INSERT INTO `document` (`id`, `name`, `description`, `thumbnail`,  `date_create`, `date_update`) VALUES (NULL, 'Trung bộ kinh - Tập 2', 'TBK ', 'tbk', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO `document` (`id`, `name`, `description`, `thumbnail`, `date_create`, `date_update`) VALUES (NULL, 'Trung bộ kinh - Tập 2', 'TBK ', 'tbk', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+
+UPDATE `document` SET `name` = 'Trung bộ kinh - Tập 11', `description` = 'TBK 11111', `thumbnail` = 'tbk1', `status` = '0' WHERE `document`.`id` = 11;
+
+INSERT INTO `chapter` (`id`, `document_id`, `chapter_order`, `title`, `thumbnail`, `content`, `isBookMark`, `level`, `length`, `child`, `date_create`, `date_update`, `html_content`, `status`, `viewed`) VALUES (NULL, '1', '1', 'Giới Thiệu', '', '', '0', '0', '0', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '', '1', '0');
+
+UPDATE `chapter` SET `document_id` = '11', `chapter_order` = '11', `title` = 'Giới Thiệu1', `thumbnail` = '1', `content` = '1', `isBookMark` = '1', `level` = '1', `length` = '1', `child` = '1', `html_content` = '1', `viewed` = '1' WHERE `chapter`.`id` = 1;

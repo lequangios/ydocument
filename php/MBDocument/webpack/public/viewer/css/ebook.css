@@ -1,0 +1,223 @@
+/* Global */
+*{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+html,body{position: relative; width: 100%; height: auto; margin: 0; padding: 0; background-color: transparent; font-family: sans-serif; letter-spacing: 0.5px; word-spacing: 1px; border-top: 1px solid #a8c3d5; margin-top: -1px; overflow: hidden;}
+section,div,p,span,h1,h2,h3,h4,ul,li{position: relative; padding: 0; margin: 0; background-color: transparent;}
+a{text-decoration: none; font-weight: bold;}
+.left-txt{}
+.right-txt{text-align: right!important;}
+.ebook{max-width: 960px; width: 100%; position: relative; margin: 0 auto; margin-top: 50px; border-top: 1px solid #fff; padding: 0px 10px; overflow: hidden;}
+.ebook .iScrollVerticalScrollbar{z-index: 30!important}
+#function{position: fixed; width: 100%; background-color:#a8c3d5; border-top: 1px solid #a8c3d5; z-index: 15}
+#menu{max-width: 960px;width: 100%; height: 50px;  margin: 0 auto}
+#menu .table_content_menu{position: relative; float: left; width: 32px; height: 32px; background-image: url("../img/menu.png"); margin: 9px 9px 9px 0px;}
+#menu .table_content_menu:hover{opacity: 0.4; cursor: pointer;}
+#menu .content_font{position: relative; float: left; width: 32px; height: 32px; background-image: url("../img/font.png"); margin: 9px 9px}
+#menu .content_font:hover{opacity: 0.4; cursor: pointer;}
+#menu .content_bookmark{position: relative; float: left; width: 32px; height: 32px; background-image: url("../img/bookmark.png"); margin: 9px 9px}
+#menu .content_bookmark:hover{opacity: 0.4; cursor: pointer;}
+#table-content{max-width: 100%; width: 100%; z-index: 40; position: absolute; left: -100%; top: 51px; padding: 0px; overflow: hidden;}
+#action-menu{position: absolute; width: 100%; z-index: 60; left: 0px; top: 50px; height: 90px; background-color:#005b91; border-top: 1px solid #005b91; opacity: 0; display: none;}
+#action{max-width: 960px;width: 100%; height: 90px;  margin: 0 auto}
+#action h1{margin-top: 10px; font-size: 16px; line-height: 22px; color: #fff; font-weight: normal;}
+#action a:hover, #action a.current{cursor: pointer; opacity: 0.4}
+#backround-choice{position: relative; overflow: hidden; float: left; width: 50%; height: 90px; max-height: 90px; left: 0; margin: 0}
+#backround-choice a{display: block; float: left; margin: 5px 15px 5px 5px; width: 40px; height: 40px; border-radius: 20px; background-color: red}
+#backround-choice a.template1{margin-left: 0px; background-color:#fff }
+#backround-choice a.template2{background-color: #e8d5a9}
+#backround-choice a.template3{background-color: #000}
+#fontsize-choice{position: relative; overflow: hidden; float: left; width: 50%; height: 90x; max-height: 90px; left: 0; margin: 0}
+#fontsize-choice p{font-size: 16px; color: #fff; display: inline-block; margin: 0px 10px;}
+#fontsize-choice a{font-size: 28px; display: inline-block; width: 40px; line-height: 40px;}
+#fontsize-choice a.disable{color: #58585a;}
+#fontsize-choice a.add{text-align: right;}
+#table-content li{list-style: none; padding: 3px 0px;}
+#table-content ul.idx-content{max-width: 960px; width: 100%; padding-bottom: 30px;}
+#table-content ul.idx-content a {font-size: 18px; text-transform: uppercase; cursor: pointer;}
+#table-content ul.idx-content a:hover{cursor: pointer;}
+#table-content ul.idx-content-sub1{padding-left: 15px}
+#table-content ul.idx-content-sub1 a {font-size: 16px; text-transform: capitalize;}
+#table-content-wrapper{ width: 100%; max-width: 100%; margin-top: 15px; overflow: hidden;}
+#content{margin: 20px 0px}
+#content .end{margin-top:30px; height: 50px;}
+#content .end p{padding-bottom: 60px;}
+.section{}
+.section .content-img{width: 100%; max-width: 100%}
+.section .content-img img{max-width: 90%; display: block; position: relative; margin: 5px auto}
+.section .content-img p.img-des{font-size: 14px; font-size: bold; margin: 5px auto; width: 100%; text-align: center;}
+.section .section_content p{margin: 20px 0px; text-align: justify;}
+.section h1.title{margin:30px 0px; text-transform: uppercase; font-size: 28px; }
+.section .sub_section1{margin: 10px 0px;}
+.section .sub_section1 h1.title{ font-size: 24px; text-transform: capitalize;}
+.section .sub_section2{}
+.section .sub_section2 h1.title{font-size: 20px;}
+.section .sub_section3{}
+.section .sub_section3 h1.title{font-size: 18px;}
+.section .sub_section4{}
+.section .sub_section4 h1.title{font-size: 16px;}
+#loading{position: absolute; width: 100%; top: 0px; left: 0px; background-color: rgba(0,0,0,0.8); display: none;}
+#loading img{display: block; position: absolute;}
+
+
+/* Animate */
+.left{-webkit-transition: left 1s linear; -moz-transition: left 1s linear; -o-transition: left 1s linear; transition: left 1s linear;}
+.opacity{-webkit-transition: opacity 1s linear; -moz-transition: opacity 1s linear; -o-transition: opacity 1s linear; transition: opacity 1s linear;}
+.color{-webkit-transition: color 2s linear; -moz-transition: color 2s linear; -o-transition: color 2s linear; transition: color 2s linear; -webkit-transition: background-color 2s linear; -moz-transition: background-color 2s linear; -o-transition: background-color 2s linear; transition: background-color 2s linear;}
+
+/* Zoom 10% */
+.zoom10 .section p{font-size: 18px; line-height: 36px;}
+.zoom10 .section h1.title{font-size: 30px; line-height: 36px}
+.zoom10 .section .sub_section1 h1.title{font-size: 26px; line-height: 32px}
+.zoom10 .section .sub_section2 h1.title{font-size: 22px; line-height: 28px;}
+.zoom10 .section .sub_section3 h1.title{font-size: 20px; line-height: 26px;}
+.zoom10 .section .sub_section4 h1.title{font-size: 18px; line-height: 24px;}
+
+/* Zoom 20% */
+.zoom20 .section p{font-size: 20px; line-height: 40px;}
+.zoom20 .section h1.title{font-size: 34px; line-height: 40px}
+.zoom20 .section .sub_section1 h1.title{font-size: 28px; line-height: 34px}
+.zoom20 .section .sub_section2 h1.title{font-size: 24px; line-height: 30px;}
+.zoom20 .section .sub_section3 h1.title{font-size: 22px; line-height: 28px;}
+.zoom20 .section .sub_section4 h1.title{font-size: 20px; line-height: 26px;}
+
+/* Zoom 30% */
+.zoom30 .section p{font-size: 22px; line-height: 44px;}
+.zoom30 .section h1.title{font-size: 36px; line-height: 42px}
+.zoom30 .section .sub_section1 h1.title{font-size: 30px; line-height: 36px}
+.zoom30 .section .sub_section2 h1.title{font-size: 26px; line-height: 32px;}
+.zoom30 .section .sub_section3 h1.title{font-size: 24px; line-height: 30px;}
+.zoom30 .section .sub_section4 h1.title{font-size: 22px; line-height: 28px;}
+
+/* Zoom 40% */
+.zoom40 .section p{font-size: 24px; line-height: 48px;}
+.zoom40 .section h1.title{font-size: 38px; line-height: 44px}
+.zoom40 .section .sub_section1 h1.title{font-size: 32px; line-height: 38px}
+.zoom40 .section .sub_section2 h1.title{font-size: 28px; line-height: 34px;}
+.zoom40 .section .sub_section3 h1.title{font-size: 26px; line-height: 32px;}
+.zoom40 .section .sub_section4 h1.title{font-size: 24px; line-height: 30px;}
+
+/* Zoom 50% */
+.zoom50 .section p{font-size: 26px; line-height: 48px;}
+.zoom50 .section h1.title{font-size: 40px; line-height: 46px}
+.zoom50 .section .sub_section1 h1.title{font-size: 34px; line-height: 40px}
+.zoom50 .section .sub_section2 h1.title{font-size: 30px; line-height: 36px;}
+.zoom50 .section .sub_section3 h1.title{font-size: 28px; line-height: 34px;}
+.zoom50 .section .sub_section4 h1.title{font-size: 26px; line-height: 32px;}
+
+/* Zoom 60% */
+.zoom60 .section p{font-size: 28px; line-height: 50px;}
+.zoom60 .section h1.title{font-size: 42px; line-height: 48px}
+.zoom60 .section .sub_section1 h1.title{font-size: 36px; line-height: 42px}
+.zoom60 .section .sub_section2 h1.title{font-size: 32px; line-height: 38px;}
+.zoom60 .section .sub_section3 h1.title{font-size: 30px; line-height: 36px;}
+.zoom60 .section .sub_section4 h1.title{font-size: 28px; line-height: 34px;}
+
+/* Zoom 70% */
+.zoom70 .section p{font-size: 30px; line-height: 54px;}
+.zoom70 .section h1.title{font-size: 44px; line-height: 50px}
+.zoom70 .section .sub_section1 h1.title{font-size: 38px; line-height: 44px}
+.zoom70 .section .sub_section2 h1.title{font-size: 34px; line-height: 40px;}
+.zoom70 .section .sub_section3 h1.title{font-size: 32px; line-height: 38px;}
+.zoom70 .section .sub_section4 h1.title{font-size: 30px; line-height: 36px;}
+
+/* Zoom 80% */
+.zoom80 .section p{font-size: 32px; line-height: 60px;}
+.zoom80 .section h1.title{font-size: 46px; line-height: 52px}
+.zoom80 .section .sub_section1 h1.title{font-size: 40px; line-height: 46px}
+.zoom80 .section .sub_section2 h1.title{font-size: 36px; line-height: 42px;}
+.zoom80 .section .sub_section3 h1.title{font-size: 34px; line-height: 40px;}
+.zoom80 .section .sub_section4 h1.title{font-size: 32px; line-height: 38px;}
+
+/* Zoom 90% */
+.zoom90 .section p{font-size: 34px; line-height: 64px;}
+.zoom90 .section h1.title{font-size: 48px; line-height: 54px}
+.zoom90 .section .sub_section1 h1.title{font-size: 42px; line-height: 48px}
+.zoom90 .section .sub_section2 h1.title{font-size: 38px; line-height: 44px;}
+.zoom90 .section .sub_section3 h1.title{font-size: 36px; line-height: 42px;}
+.zoom90 .section .sub_section4 h1.title{font-size: 34px; line-height: 40px;}
+
+/* Zoom 100% */
+.zoom100 .section p{font-size: 34px; line-height: 64px;}
+.zoom100 .section h1.title{font-size: 48px; line-height: 54px}
+.zoom100 .section .sub_section1 h1.title{font-size: 42px; line-height: 48px}
+.zoom100 .section .sub_section2 h1.title{font-size: 38px; line-height: 44px;}
+.zoom100 .section .sub_section3 h1.title{font-size: 36px; line-height: 42px;}
+.zoom100 .section .sub_section4 h1.title{font-size: 34px; line-height: 40px;}
+
+/* Style 1*/
+.template1{background-color: rgba(255,255,255,1); color: #58585a; font-size: 16px; line-height: 32px;}
+.template1 a{color:#00baf2}
+.template1 strong.number{color: #00baf2}
+.template1 .section h1.title{color: #005b91}
+.template1 .section .sub_section1 h1.title{color: #00baf2}
+.template1 .section .content-img p.img-des {color: #ff9a60}
+.template1 #table-content{background-color: rgba(255,255,255,1);}
+.template1 #table-content ul.idx-content a{color: #58585a;}
+.template1 #table-content ul.idx-content a:hover{color: #00baf2}
+.template1 #table-content ul.idx-content a.current{color: #00baf2}
+
+/* Style 2*/
+.template2{background-color: #e8d5a9; color: #58585a; font-size: 16px; line-height: 32px;}
+.template2 a{color:#00baf2}
+.template2 strong.number{color: #00baf2}
+.template2 .section h1.title{color: #005b91}
+.template2 .section .sub_section1 h1.title{color: #0e5b7f}
+.template2 .section .content-img p.img-des {color: #ff9a60}
+.template2 #table-content{background-color: rgba(255,255,255,1);}
+.template2 #table-content ul.idx-content a{color: #58585a;}
+.template2 #table-content ul.idx-content a:hover{color: #00baf2}
+.template2 #table-content ul.idx-content a.current{color: #00baf2}
+
+/* Style 3*/
+.template3{background-color: #000; color: #c5cacc; font-size: 16px; line-height: 32px;}
+.template3 a{color:#00baf2}
+.template3 strong.number{color: #9b2e48}
+.template3 .section h1.title{color: #9b2e48}
+.template3 .section .sub_section1 h1.title{color: #bc5643}
+.template3 .section .content-img p.img-des {color: #ff9a60}
+.template3 #table-content{background-color: rgba(255,255,255,1);}
+.template3 #table-content ul.idx-content a{color: #58585a;}
+.template3 #table-content ul.idx-content a:hover{color: #00baf2}
+.template3 #table-content ul.idx-content a.current{color: #00baf2}
+
+/* Mobile */
+@media screen and (max-width: 500px) 
+{
+	#menu{ max-width: 100%; margin: 10px 10px}
+	#content{max-width: 100%; margin: 15px}
+	#table-content{top: 71px;}
+	#table-content li{margin: 15px 0px}
+
+	#table-content-wrapper{margin-left: 10px;}
+
+	#action-menu{top: 71px; height: 180px}
+	#action {height: 180px; max-width: 100%}
+	#action h1{margin-left: 10px;}
+	#backround-choice{width: 100%; max-width: 100%;}
+	#backround-choice a.template1{margin-left: 10px;}
+	#fontsize-choice a{margin-left: 10px;}
+
+	#wrapper{padding: 0px}
+	#content{padding: 0px;}
+}
+
+/* Tablet */
+@media screen and (max-width: 1000px) and (min-width: 501px) 
+{
+	#menu{ max-width: 100%; margin: 10px 10px}
+	#table-content{top: 71px;}
+	#table-content li{margin: 15px 0px}
+
+	#action-menu{top: 71px;}
+	#action h1{margin-left: 10px;}
+	#backround-choice a.template1{margin-left: 10px;}
+
+	#wrapper{padding: 0px}
+	#content{padding: 0px; padding-right: 10px; padding-left: 10px;}
+}
+
+/* Desktop */
+@media screen and (min-width: 1001px) 
+{
+	#table-content li{margin: 10px 0px}
+	#table-content-wrapper{margin-left: 10px;}
+}

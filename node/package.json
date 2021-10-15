@@ -1,0 +1,33 @@
+{
+  "name": "ydocument",
+  "version": "1.0.0",
+  "description": "Documentation template",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lequangios/ydocument.git"
+  },
+  "keywords": [
+    "document",
+    "html",
+    "css"
+  ],
+  "author": "Le Viet Quang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lequangios/ydocument/issues"
+  },
+  "homepage": "https://github.com/lequangios/ydocument#readme",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "express": "^4.17.1",
+    "express-generator": "^4.16.1",
+    "ejs": "^3.1.6",
+    "serve": "^12.0.0",
+    "body-parser": "^1.19.0"
+  }
+}

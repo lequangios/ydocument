@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Responsive Web -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Meta -->
+    <title>MBDocument demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/520a56b89c.js" crossorigin="anonymous"></script>
+    <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container-fluid page">
+        <main id="block-list-template">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12" v-if="node">
+                            <section-node-template v-if="node.type.name == 'section'" :node="node" v-on:saveupdatenode="saveUpdate"></section-node-template>
+                            <block-level-1 v-if="node.type.name == 'block-level-1'" :node="node" v-on:saveupdatenode="saveUpdate"></block-level-1>
+                            <block-level-2 v-if="node.type.name == 'block-level-2'" :node="node" v-on:saveupdatenode="saveUpdate"></block-level-2>
+                            <block-level-3 v-if="node.type.name == 'block-level-3'" :node="node" v-on:saveupdatenode="saveUpdate"></block-level-3>
+                            <block-level-4 v-if="node.type.name == 'block-level-4'" :node="node" v-on:saveupdatenode="saveUpdate"></block-level-4>
+                            <block-level-5 v-if="node.type.name == 'block-level-5'" :node="node" v-on:saveupdatenode="saveUpdate"></block-level-5>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script> -->
+    <script src="../../assets/js/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="../../assets/mbDocument.js"></script>
+    <script type="text/x-template" id="section-node-template">
+        <template v-if="node">
+            <div v-bind:class="node.type.name">
+                <div id="editor" v-html="node.content">                
+                </div>
+                <a class="btn btn-primary" v-on:click="saveNode"><i class="fas fa-save"></i><span>Save<span></a>
+            </div>
+        </template>
+    </script>
+    <script type="text/x-template" id="block-level-1">
+        <template v-if="node">
+            <div v-bind:class="node.type.name">
+                <div class="input-group ">
+                    <span class="input-group-text" for="section_title">Title</span>
+                    <input type="text" class="form-control" id="section_title" v-model="node.title" v-bind:value="node.title">
+                </div>
+                <div id="editor" v-html="node.content">                
+                </div>
+                <a class="btn btn-primary" v-on:click="saveNode"><i class="fas fa-save"></i><span>Save<span></a>
+            </div>
+        </template>
+    </script>
+    <script type="text/x-template" id="block-level-2">
+        <template v-if="node">
+            <div v-bind:class="node.type.name">
+                <div class="input-group ">
+                    <span class="input-group-text" for="section_title">Title</span>
+                    <input type="text" class="form-control" id="section_title" v-model="node.title" v-bind:value="node.title">
+                </div>
+                <div id="editor" v-html="node.content">                
+                </div>
+                <a class="btn btn-primary" v-on:click="saveNode"><i class="fas fa-save"></i><span>Save<span></a>
+            </div>
+        </template>
+    </script>
+    <script type="text/x-template" id="block-level-3">
+        <template v-if="node">
+            <div v-bind:class="node.type.name">
+                <div class="input-group ">
+                    <span class="input-group-text" for="section_title">Title</span>
+                    <input type="text" class="form-control" id="section_title" v-model="node.title" v-bind:value="node.title">
+                </div>
+                <div id="editor" v-html="node.content">                
+                </div>
+                <a class="btn btn-primary" v-on:click="saveNode"><i class="fas fa-save"></i><span>Save<span></a>
+            </div>
+        </template>
+    </script>
+    <script type="text/x-template" id="block-level-4">
+        <template v-if="node">
+            <div v-bind:class="node.type.name">
+                <div class="input-group ">
+                    <span class="input-group-text" for="section_title">Title</span>
+                    <input type="text" class="form-control" id="section_title" v-model="node.title" v-bind:value="node.title">
+                </div>
+                <div id="editor" v-html="node.content">                
+                </div>
+                <a class="btn btn-primary" v-on:click="saveNode"><i class="fas fa-save"></i><span>Save<span></a>
+            </div>
+        </template>
+    </script>
+    <script type="text/x-template" id="block-level-5">
+        <template v-if="node">
+            <div v-bind:class="node.type.name">
+                <div class="input-group ">
+                    <span class="input-group-text" for="section_title">Title</span>
+                    <input type="text" class="form-control" id="section_title" v-model="node.title" v-bind:value="node.title">
+                </div>
+                <div id="editor" v-html="node.content">                
+                </div>
+                <a class="btn btn-primary" v-on:click="saveNode"><i class="fas fa-save"></i><span>Save<span></a>
+            </div>
+        </template>
+    </script>
+    <script src="../../assets/js/node_edit.js">
+    </script>
+</body>
+
+</html>
