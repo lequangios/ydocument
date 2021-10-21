@@ -6,9 +6,9 @@ use core;
 
 class Category extends core\Model
 {
-    function __construct()
+    function __construct($registry)
     {
-        parent::__construct();
+        parent::__construct($registry);
         $this->keys = array('parent_id', 'name', 'description', 'thumbnail', 'path', 'level', 'views');
     }
 

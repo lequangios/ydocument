@@ -7,9 +7,9 @@ use core;
 
 class Chapter extends core\Model
 {
-    function __construct()
+    function __construct($registry)
     {
-        parent::__construct();
+        parent::__construct($registry);
         $this->keys = array('document_id', 'chapter_order', 'title', 'thumbnail', 'content', 'isBookMark', 'level', 'length', 'child', 'html_content');
     }
 

@@ -9,12 +9,23 @@ class Controller
     protected $request = null;
     protected $namespace = '\\';
     protected $loader = false;
+    protected $session = false;
+    protected $isPrivate = false; // If true, user must login to call
 
-    function __construct($request, $namespace)
+//    function __construct($request, $session, $namespace)
+//    {
+//        $this->request = $request;
+//        $this->session = $session;
+//        $this->namespace = $namespace;
+//        $this->loader = new Loader($this, $this->namespace);
+//    }
+
+    function __construct($registry)
     {
-        $this->request = $request;
-        $this->namespace = $namespace;
-        $this->loader = new Loader($this, $this->namespace);
+        $this->request = $registry->get('request');
+        $this->session = $registry->get('session');
+        $this->loader = $registry->get('loader');
+        $this->loader->setProxy($this);
     }
 
     public function has($key) {

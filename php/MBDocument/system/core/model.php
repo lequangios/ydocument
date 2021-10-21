@@ -10,9 +10,10 @@ class Model
     protected $db = null;
     protected $keys = array();
 
-    function __construct()
+    function __construct($registry)
     {
-        $this->db = new library\Database(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+        //$this->db = new library\Database(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+        $this->db = $registry->get('db');
     }
 
     function queryDB($query) {

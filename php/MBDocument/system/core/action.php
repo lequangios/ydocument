@@ -1,24 +1,17 @@
 <?php
 
+
 namespace core;
 
-class Router
+
+class Action
 {
     private $id;
-    private $route = 'document';
+    private $route;
+    private $namespace;
     private $method = 'index';
-    private $namespace = '';
-    private $registry;
-    private $session;
-    private $pre_action = array();
 
-    public function __construct($registry) {
-        $this->registry = $registry;
-        $this->session = $this->registry->get('session');
-        $request = $this->registry->get('request');
-        $namespace = $this->registry->get('namespace');
-
-        $route = $request->getRouter();
+    public function __construct(string $route, string $namespace) {
         $this->id = $route;
         $this->namespace = $namespace;
 
@@ -41,7 +34,7 @@ class Router
         return $this->id;
     }
 
-    public function execute($args = array()) {
+    public function execute($registry, array $args = array()) {
         // Stop any magical methods being called
         if (substr($this->method, 0, 2) == '__') {
             return new \Exception('Error: Calls to magic methods are not allowed!');
@@ -52,7 +45,7 @@ class Router
         // Initialize the class
         if (is_file($file)) {
             include_once($file);
-            $controller = new $class($this->registry);
+            $controller = new $class($registry);
         } else {
             return new \Exception('Error: Could not call ' . $this->route . '/' . $this->method . '!');
         }

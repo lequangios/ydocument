@@ -8,11 +8,20 @@ class Loader
 {
     protected $proxy;
     protected $namespace;
+    private $registry;
 
-    function __construct($proxy, $namespace)
+    function __construct($namespace)
     {
-        $this->proxy = $proxy;
+        $this->registry = new Registry();
         $this->namespace = $namespace;
+    }
+
+    function setProxy($value){
+        $this->proxy = $value;
+    }
+
+    function setRegistry($key, $value){
+        $this->registry->set($key, $value);
     }
 
     public function model($route) {
@@ -26,7 +35,7 @@ class Loader
             if (is_file($file)) {
                 include_once($file);
 
-                $model = new $class();
+                $model = new $class($this->registry);
                 $this->proxy->{$registry} = $model;
             } else {
                 throw new \Exception('Error: Could not load model ' . $route . '!');

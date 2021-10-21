@@ -11,8 +11,8 @@ class File extends core\Model
     private $base_dir = '';
     private $file_types = '';
 
-    function __construct() {
-        parent::__construct();
+    function __construct($registry) {
+        parent::__construct($registry);
         $this->base_dir = DIR_ASSETS . 'images';
         $this->base_url = ASSETS_URL.'/images';
         $this->file_types = "jpg,jpeg,png,gif,zip,JPG,JPEG,PNG,GIF,ZIP";
